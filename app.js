@@ -150,11 +150,11 @@ app.post("/daoshop", async (req, res) => {
         function (err, records) {
             if (err) {
                 console.error(err);
-                return res.send(err);
+                return res.send("error");
             }
             records.forEach(function (record) {
                 let id = record.getId();
-                return res.send(id);
+                return res.send("success");
             });
         }
     );
