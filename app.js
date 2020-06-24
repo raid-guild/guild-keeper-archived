@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
+var cors = require("cors");
 
 var Airtable = require("airtable");
 
@@ -9,6 +10,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 require("dotenv").config();
 
