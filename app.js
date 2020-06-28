@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
+var cors = require("cors");
 
 var Airtable = require("airtable");
 
@@ -9,6 +10,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 require("dotenv").config();
 
@@ -45,6 +47,7 @@ const HELP_MESSAGE =
     "\t1. `create-raid` -- Creates a raid channel and initializes it.\n" +
     "\t2. `create-rip` -- Creates a rip channel and initializes it.\n" +
     "\t3. `crypt` -- Crypts an raid/rip/client channel under the battlefield and client chat category.\n" +
+    "\t4. `role-stats` -- Returns number of people assigned to each role.\n" +
     "\nI can also send in apprentice issues from any of the raidguild's repo to discord." +
     "\tIf you want more info please see the **GuildKeeper docs:** https://hackmd.io/@saimano/guild-keeper\n" +
     "\nFor help with a specific command type `!keeper help <command>`\n" +
@@ -150,11 +153,11 @@ app.post("/daoshop", async (req, res) => {
         function (err, records) {
             if (err) {
                 console.error(err);
-                return res.send(err);
+                return res.send("error");
             }
             records.forEach(function (record) {
                 let id = record.getId();
-                return res.send(id);
+                return res.send("success");
             });
         }
     );
@@ -213,6 +216,8 @@ client.on("message", (message) => {
             return client.commands
                 .get("crypt-raid-rip")
                 .execute(message, MEMBER_ROLE_ID);
+        case "role-stats":
+            return client.commands.get("role-stats").execute(message);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."

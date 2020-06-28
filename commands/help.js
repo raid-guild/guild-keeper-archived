@@ -8,6 +8,7 @@ module.exports = {
         const CHECK_RAIDS = `To view all raids registered in Airtable, use **!keeper check-raids**.`;
         const CHECK_STATUS = `To check the status of a particular raid from Airtable, use **!keeper check-status [raid-name]**.`;
         const SET_STATUS = `To set/update the status of particular raid, use **!keeper set-status [raid-name] [STATUS_CODE]**. Below are the available status codes.\n\t**0** -- High Signal\n\t**1** -- Prepping for Battle\n\t**2** -- Yes\n\t**3** -- Active Raids\n\t**4** -- Completed\n\t**5** -- Failed\n\t**6** -- Declined.\n_NOTE: Only members can use this command. If a non-member uses it, other RG members will be alerted._`;
+        const ROLE_STATS = `Returns the total number of members assigned to each role.`;
 
         if (args.length < 3)
             return message.channel.send("Missing command! Help with what?");
@@ -25,6 +26,8 @@ module.exports = {
                 return message.channel.send(CHECK_RAIDS);
             case "set-status":
                 return message.channel.send(SET_STATUS);
+            case "role-stats":
+                return message.channel.send(ROLE_STATS);
             default:
                 return message.channel.send(
                     "Hmm.. I don't know what that command does. Do you know?"
