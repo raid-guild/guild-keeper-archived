@@ -18,7 +18,7 @@ DAOSHOP_ROUTER.post("/", async (req, res) => {
         slot_3,
         transaction_hash,
     } = req.body;
-    await req.DAOSHOP_BASE("Bookings").create(
+    await req.DAOSHOP_BASE("Clients").create(
         [
             {
                 fields: {
