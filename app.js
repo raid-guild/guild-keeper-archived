@@ -70,10 +70,10 @@ client.on("ready", async () => {
 client.on("message", (message) => {
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-    // if (
-    //     !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
-    // )
-    //     return message.channel.send("Only Members can command me!");
+    if (
+        !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
+    )
+        return message.channel.send("Only Members can command me!");
 
     let args = message.content.slice(PREFIX.length).split(/ +/);
     let command = args[1];
