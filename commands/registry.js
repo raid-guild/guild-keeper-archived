@@ -6,7 +6,14 @@ module.exports = {
 
         let data = {};
         // !keeper registry email/test eth/addr ens/addr telegram/test twitter/test
-        const options = ["email", "eth", "ens", "telegram", "twitter"];
+        const options = [
+            "email",
+            "eth",
+            "ens",
+            "telegram",
+            "twitter",
+            "github",
+        ];
         let values = {};
         let name = message.author.username;
         let discord_handle = `@${name}#${message.author.discriminator}`;
@@ -69,6 +76,7 @@ const Entry = (name, discord_handle, data, values, message, registry_base) => {
                         "Discord Handle": discord_handle,
                         "Telegram Handle": values["telegram"],
                         "Twitter Handle": values["twitter"],
+                        "Github Handle": values["github"],
                         "Email Address": values["email"],
                     },
                 },
@@ -95,6 +103,7 @@ const Entry = (name, discord_handle, data, values, message, registry_base) => {
                         "Discord Handle": discord_handle,
                         "Telegram Handle": values["telegram"],
                         "Twitter Handle": values["twitter"],
+                        "Github Handle": values["github"],
                         "Email Address": values["email"],
                     },
                 },
