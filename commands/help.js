@@ -9,6 +9,7 @@ module.exports = {
         const CHECK_STATUS = `To check the status of a particular raid from Airtable, use **!keeper check-status [raid-name]**.`;
         const SET_STATUS = `To set/update the status of particular raid, use **!keeper set-status [raid-name] [STATUS_CODE]**. Below are the available status codes.\n\t**0** -- High Signal\n\t**1** -- Prepping for Battle\n\t**2** -- Yes\n\t**3** -- Active Raids\n\t**4** -- Completed\n\t**5** -- Failed\n\t**6** -- Declined.\n_NOTE: Only members can use this command. If a non-member uses it, other RG members will be alerted._`;
         const ROLE_STATS = `Returns the total number of members assigned to each role.`;
+        const REGISTRY = `To add or update your information in the registry, use **!keeper registry [options]**. Options include \n1. email/[your email]\n2. eth/[your eth address]\n3. ens/[your ens address]\n4. telegram/[your telegram handle including @]\n5. twitter/[your twitter handle including @]\n\nFor example, to add or update your eth address, use **!keeper registry eth/[address]** or if you want to add or update more than one info, chain options like **!keeper registry eth/[address] twitter/[handle]**`;
 
         if (args.length < 3)
             return message.channel.send("Missing command! Help with what?");
@@ -28,6 +29,8 @@ module.exports = {
                 return message.channel.send(SET_STATUS);
             case "role-stats":
                 return message.channel.send(ROLE_STATS);
+            case "registry":
+                return message.channel.send(REGISTRY);
             default:
                 return message.channel.send(
                     "Hmm.. I don't know what that command does. Do you know?"

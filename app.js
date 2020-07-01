@@ -23,6 +23,7 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
+var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
 
 // Express server section
 const app = express();
@@ -69,10 +70,10 @@ client.on("ready", async () => {
 client.on("message", (message) => {
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-    if (
-        !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
-    )
-        return message.channel.send("Only Members can command me!");
+    // if (
+    //     !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
+    // )
+    //     return message.channel.send("Only Members can command me!");
 
     let args = message.content.slice(PREFIX.length).split(/ +/);
     let command = args[1];
@@ -111,6 +112,10 @@ client.on("message", (message) => {
                 .execute(message, process.env.MEMBER_ROLE_ID);
         case "role-stats":
             return client.commands.get("role-stats").execute(message);
+        case "registry":
+            return client.commands
+                .get("registry")
+                .execute(message, args, registry_base);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."
