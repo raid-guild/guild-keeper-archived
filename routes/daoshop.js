@@ -1,4 +1,5 @@
 const express = require("express");
+const Clients = require("../models/clients_schema");
 
 const DAOSHOP_ROUTER = express.Router();
 
@@ -18,6 +19,28 @@ DAOSHOP_ROUTER.post("/", async (req, res) => {
         slot_3,
         transaction_hash,
     } = req.body;
+
+    const client = new Clients({
+        project_name,
+        summary,
+        skills_needed,
+        specs,
+        name,
+        email,
+        handle,
+        about_guild,
+        to_know,
+        slot_1,
+        slot_2,
+        slot_3,
+        transaction_hash,
+    });
+
+    client
+        .save()
+        .then((data) => console.log("Success - Mongo"))
+        .catch((err) => console.log(err));
+
     await req.DAOSHOP_BASE("Clients").create(
         [
             {

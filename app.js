@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const Airtable = require("airtable");
 const express = require("express");
+const mongoose = require("mongoose");
 const fs = require("fs");
 const cors = require("cors");
 
@@ -63,6 +64,13 @@ for (const file of commandFiles) {
 client.on("ready", async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     app.listen(process.env.PORT || 5000, () => console.log("Listening.."));
+    mongoose.connect(
+        process.env.MONGODB_CONNECTION,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        () => {
+            console.log("Connected to database..");
+        }
+    );
     // fetchRaids();
 });
 
