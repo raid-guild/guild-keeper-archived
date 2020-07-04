@@ -3,7 +3,7 @@ const Clients = require("../models/clients_schema");
 
 const DAOSHOP_ROUTER = express.Router();
 
-DAOSHOP_ROUTER.post("/", async (req, res) => {
+DAOSHOP_ROUTER.post("/airtable", async (req, res) => {
     let {
         project_name,
         summary,
@@ -19,27 +19,6 @@ DAOSHOP_ROUTER.post("/", async (req, res) => {
         slot_3,
         transaction_hash,
     } = req.body;
-
-    const client = new Clients({
-        project_name,
-        summary,
-        skills_needed,
-        specs,
-        name,
-        email,
-        handle,
-        about_guild,
-        to_know,
-        slot_1,
-        slot_2,
-        slot_3,
-        transaction_hash,
-    });
-
-    client
-        .save()
-        .then((data) => console.log("Success - Mongo"))
-        .catch((err) => console.log(err));
 
     await req.DAOSHOP_BASE("Clients").create(
         [
@@ -72,6 +51,49 @@ DAOSHOP_ROUTER.post("/", async (req, res) => {
             });
         }
     );
+});
+
+DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
+    let {
+        project_name,
+        summary,
+        skills_needed,
+        specs,
+        name,
+        email,
+        handle,
+        about_guild,
+        to_know,
+        slot_1,
+        slot_2,
+        slot_3,
+    } = req.body;
+
+    const client = new Clients({
+        project_name,
+        summary,
+        skills_needed,
+        specs,
+        name,
+        email,
+        handle,
+        about_guild,
+        to_know,
+        slot_1,
+        slot_2,
+        slot_3,
+    });
+
+    client
+        .save()
+        .then((data) => {
+            console.log("Success - Mongo");
+            res.send("Success - Mongo");
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send("Error - Mongo");
+        });
 });
 
 module.exports = DAOSHOP_ROUTER;
