@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const Airtable = require("airtable");
 const express = require("express");
+const mongoose = require("mongoose");
 const fs = require("fs");
 const cors = require("cors");
 
@@ -23,6 +24,7 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
+var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
 
 // Express server section
 const app = express();
@@ -62,6 +64,13 @@ for (const file of commandFiles) {
 client.on("ready", async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     app.listen(process.env.PORT || 5000, () => console.log("Listening.."));
+    mongoose.connect(
+        process.env.MONGODB_CONNECTION,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        () => {
+            console.log("Connected to database..");
+        }
+    );
     // fetchRaids();
 });
 
@@ -111,6 +120,10 @@ client.on("message", (message) => {
                 .execute(message, process.env.MEMBER_ROLE_ID);
         case "role-stats":
             return client.commands.get("role-stats").execute(message);
+        case "registry":
+            return client.commands
+                .get("registry")
+                .execute(message, args, registry_base);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."
