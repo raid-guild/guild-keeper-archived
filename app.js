@@ -25,6 +25,7 @@ Airtable.configure({
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
 var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
+var treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
 
 // Express server section
 const app = express();
@@ -124,6 +125,10 @@ client.on("message", (message) => {
             return client.commands
                 .get("registry")
                 .execute(message, args, registry_base);
+        case "treasury":
+            return client.commands
+                .get("treasury")
+                .execute(message, treasury_base);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."

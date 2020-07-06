@@ -8,7 +8,8 @@ const HELP_MESSAGE =
     "\t2. `create-rip` -- Creates a rip channel and initializes it.\n" +
     "\t3. `crypt` -- Crypts an raid/rip/client channel under the battlefield and client chat category.\n" +
     "\t4. `role-stats` -- Returns number of people assigned to each role.\n" +
-    "\t5.. `registry` -- Used to add or update your info in the registry.\n" +
+    "\t5. `registry` -- Used to add or update your info in the registry.\n" +
+    "\t6. `treasury` -- Used to record a direct fund transfer to the guild.\n" +
     "\nI can also send in apprentice issues from any of the raidguild's repo to discord." +
     " If you want more info please see the **GuildKeeper docs:** https://hackmd.io/@saimano/guild-keeper\n" +
     "\nFor help with a specific command type `!keeper help <command>`\n" +
