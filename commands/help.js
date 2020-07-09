@@ -11,6 +11,7 @@ module.exports = {
         const ROLE_STATS = `🗡 Returns the total number of members assigned to each role.`;
         const REGISTRY = `🗡 To add or update your information in the registry, use **!keeper registry [options]**. Options include \n1. email/[your email]\n2. eth/[your eth address]\n3. ens/[your ens address]\n4. telegram/[your telegram handle]\n5. twitter/[your twitter handle]\n6. github/[your github username]\n\nFor example, to add or update your eth address, use **!keeper registry eth/[address]** or if you want to add or update more than one info, chain options like **!keeper registry eth/[address] twitter/[handle]**`;
         const TREASURY = `🗡 To record a direct transfer transaction to the guild, use **!keeper treasury "[brief description]" [etherscan-link]**.\n_Note: Double quotes [""] are necessary to enclose the description._`;
+        const GAS_INFO = `🗡 Returns the live gas price stats.`;
 
         if (args.length < 3)
             return message.channel.send("Missing command! Help with what?");
@@ -34,6 +35,8 @@ module.exports = {
                 return message.channel.send(REGISTRY);
             case "treasury":
                 return message.channel.send(TREASURY);
+            case "gas-info":
+                return message.channel.send(GAS_INFO);
             default:
                 return message.channel.send(
                     "Hmm.. I don't know what that command does. Check `!keeper help`"
