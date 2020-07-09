@@ -11,15 +11,6 @@ module.exports = {
         let projectName = args[2];
         let proposal = args[3];
 
-        // Old Regex
-        // "^(https?:\\/\\/)?" +
-        //     "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
-        //     "((\\d{1,3}\\.){3}\\d{1,3}))" +
-        //     "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
-        //     "(\\?[;&a-z\\d%_.~+=-]*)?" +
-        //     "(\\#[-a-z\\d_]*)?$",
-        // "i"
-
         var pattern = new RegExp(
             "^" +
                 // protocol identifier (optional)
@@ -82,8 +73,11 @@ module.exports = {
             },
             {
                 id: MEMBER_ROLE_ID,
-                allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY"],
-                deny: ["SEND_MESSAGES"],
+                allow: [
+                    "VIEW_CHANNEL",
+                    "READ_MESSAGE_HISTORY",
+                    "SEND_MESSAGES",
+                ],
             },
             {
                 id: message.author,

@@ -2,8 +2,8 @@ module.exports = {
     name: "help",
     description: "Returns the list of available commands for use.",
     execute(message, args) {
-        const CREATE_RAID = `To create a raid channel, use **!keeper create-raid [the-project-name (no spaces)] [link to the project proposal (must be a link)] [mention party member1] [mention party member2] [mention if anyone else is involved]**. By default, if no party members are mentioned, the person who sends this commands will be included without an explicit mention.`;
-        const CREATE_RIP = `To create a rip channel, use **!keeper create-rip [the-project-name (no spaces)] [link to the project proposal (must be a link)] [mention party member1] [mention party member2] [mention if anyone else is involved]**. By default, if no party members are mentioned, the person who sends this commands will be included without an explicit mention.`;
+        const CREATE_RAID = `To create a raid channel, use **!keeper create-raid [the-project-name (no spaces)] [link to the project proposal (must be a link)] [mention party member1] [mention party member2] [mention if anyone else is involved]**. By default, the person who sends this commands will be included in the party without an explicit mention.`;
+        const CREATE_RIP = `To create a rip channel, use **!keeper create-rip [the-project-name (no spaces)] [link to the project proposal (must be a link)] [mention party member1] [mention party member2] [mention if anyone else is involved]**. By default, the person who sends this commands will be included in the party without an explicit mention.`;
         const CRYPT = `To crypt one, navigate to the raid/rip/client channel you wanna crypt and use **!keeper crypt**.`;
         const CHECK_RAIDS = `To view all raids registered in Airtable, use **!keeper check-raids**.`;
         const CHECK_STATUS = `To check the status of a particular raid from Airtable, use **!keeper check-status [raid-name]**.`;
