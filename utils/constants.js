@@ -14,7 +14,7 @@ const HELP_MESSAGE =
     "\n🛡 **HOW TO COMMANDS**\n" +
     "\t📍 `apprentice-issue` -- Provides information on how to set a repo for apprentice issues to be posted on _#apprentice-issue-alerts_.\n" +
     "\n**USING HOW TO COMMANDS**\n" +
-    "There is no help for _how to commands_ as they are not actionable, so directly use `!keeper how-to <command>`. _Note_ commands, the prefix `how-to` should be added before the actual command.\n" +
+    "There is no help for _how to commands_ as they are not actionable, so directly use `!keeper how-to <command>`. _Note_: the prefix `how-to` should be added before the actual command.\n" +
     "\n🛡 **UTILITY COMMANDS**\n" +
     "\t📍 `gas-info` -- Returns live gas prices.\n" +
     "\n**USING UTILITY COMMANDS**\n" +
