@@ -94,6 +94,13 @@ client.on("message", (message) => {
     )
         return message.channel.send(HELP_MESSAGE);
 
+    if (
+        args.length <= 3 &&
+        message.content.startsWith(PREFIX) &&
+        args[1] === "how-to"
+    )
+        return client.commands.get("how-to").execute(message, args);
+
     switch (command) {
         case "help":
             return client.commands.get("help").execute(message, args);
