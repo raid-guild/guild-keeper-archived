@@ -11,7 +11,7 @@ module.exports = {
             "`let me select individual events`" +
             ` and check **only** ` +
             "`Issues`" +
-            ` checkbox.\n\t 📍 Check the _Active_ checkbox if not checked and click on _Add webhook_.\n\nNow, the repository is all set to send in updated to the guild keeper bot.\n\nTo add an _apprentice issue_, select the ` +
+            ` checkbox.\n\t📍 Check the _Active_ checkbox if not checked and click on _Add webhook_.\n\nNow, the repository is all set to send in updated to the guild keeper bot.\n\nTo add an _apprentice issue_, select the ` +
             "`apprentice-issue`" +
             ` label for the issue you want an apprentice to work on.\n\n_Note: Do not share or use the payload URL for any of the purposes apart from raidguild._`;
 

@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const Airtable = require("airtable");
 const express = require("express");
 const mongoose = require("mongoose");
+const axios = require("axios");
 const fs = require("fs");
 const cors = require("cors");
 
@@ -11,7 +12,7 @@ require("dotenv").config();
 
 // Constant imports
 const constants = require("./utils/constants");
-const { PREFIX, HELP_MESSAGE, STATUS_CODES } = constants;
+const { PREFIX, HELP_MESSAGE } = constants;
 
 // Route imports
 const PAYLOAD_ROUTER = require("./routes/payload");
@@ -72,17 +73,16 @@ client.on("ready", async () => {
             console.log("Connected to database..");
         }
     );
-    // fetchRaids();
 });
 
 // Bot on message
 client.on("message", (message) => {
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-    if (
-        !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
-    )
-        return message.channel.send("Only Members can command me!");
+    // if (
+    //     !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
+    // )
+    //     return message.channel.send("Only Members can command me!");
 
     let args = message.content.slice(PREFIX.length).split(/ +/);
     let command = args[1];
@@ -136,6 +136,8 @@ client.on("message", (message) => {
             return client.commands
                 .get("treasury")
                 .execute(message, treasury_base);
+        case "gas-info":
+            return client.commands.get("gas-info").execute(message, axios);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."
@@ -144,41 +146,3 @@ client.on("message", (message) => {
 });
 
 client.login(process.env.TOKEN);
-
-// Yet to be implemented
-
-// const fetchRaids = async () => {
-//     await raidcentral_base("Raids")
-//         .select({
-//             fields: ["Name", "Status"],
-//             view: "Grid view",
-//         })
-//         .eachPage(
-//             function page(records, fetchNextPage) {
-//                 records.forEach((record) => {
-//                     data[record.fields.Name.toLowerCase()] = {
-//                         id: record.id,
-//                         status: record.fields.Status,
-//                     };
-//                 });
-//                 fetchNextPage();
-//             },
-//             function done(err) {
-//                 if (err) {
-//                     console.error(err);
-//                     return;
-//                 }
-//             }
-//         );
-// };
-
-// case "check-raids":
-//     return client.commands.get("check-raids").execute(message, raidcentral_raidcentral_base);
-// case "check-status":
-//     return client.commands
-//         .get("check-status")
-//         .execute(message, args, data);
-// case "set-status":
-//     return client.commands
-//         .get("set-status")
-//         .execute(message, args, data, MEMBER_ROLE_ID, STATUS_CODES);
