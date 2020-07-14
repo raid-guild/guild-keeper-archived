@@ -97,7 +97,24 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
 });
 
 DAOSHOP_ROUTER.post("/support", async (req, res) => {
-    console.log(req.body);
+    let response = {
+        fulfillmentMessages: [
+            {
+                card: {
+                    title: "Create a ticket",
+                    subtitle: "Please create a support ticket below",
+                    imageUri: "https://example.com/images/example.png",
+                    buttons: [
+                        {
+                            text: "Create ticket",
+                            postback: "https://airtable.com/shr3rxdFMBeihuFXY",
+                        },
+                    ],
+                },
+            },
+        ],
+    };
+    res.send(response);
 });
 
 module.exports = DAOSHOP_ROUTER;
