@@ -96,4 +96,8 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
         });
 });
 
+DAOSHOP_ROUTER.post("/support", async (req, res) => {
+    console.log(req.body);
+});
+
 module.exports = DAOSHOP_ROUTER;
