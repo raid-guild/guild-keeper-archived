@@ -17,6 +17,7 @@ const { PREFIX, HELP_MESSAGE } = constants;
 // Route imports
 const PAYLOAD_ROUTER = require("./routes/payload");
 const DAOSHOP_ROUTER = require("./routes/daoshop");
+const TWITTER_ROUTER = require("./routes/twitter");
 
 // Airtable Configuration
 Airtable.configure({
@@ -47,6 +48,14 @@ app.use(
         next();
     },
     DAOSHOP_ROUTER
+);
+app.use(
+    "/twitter",
+    (req, res, next) => {
+        req.CLIENT = client;
+        next();
+    },
+    TWITTER_ROUTER
 );
 app.get("/", (req, res) => {
     res.send("Hi");
