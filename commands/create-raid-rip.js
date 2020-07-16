@@ -114,15 +114,28 @@ module.exports = {
             type === "rip" ? "RIP" : "RAID"
         }** project is created with the **initial proposal** - ${proposal} and the following **party members** - ${partyMessage}`;
 
-        message.guild.channels
-            .create(`${type}-${projectName}`, {
-                reason: `${type}`,
-                type: "text",
-                parent: process.env.BATTLEFIELD_ID,
-                topic: `A ${type} channel for ${projectName}.`,
-                permissionOverwrites: channelPermissions,
-            })
-            .then((channel) => channel.send(welcomeMessage))
-            .catch(console.error);
+        if (type === "raid") {
+            message.guild.channels
+                .create(`${type}-${projectName}`, {
+                    reason: `${type}`,
+                    type: "text",
+                    parent: process.env.RAIDS_CATEGORY_ID,
+                    topic: `A ${type} channel for ${projectName}.`,
+                    permissionOverwrites: channelPermissions,
+                })
+                .then((channel) => channel.send(welcomeMessage))
+                .catch(console.error);
+        } else if (type === "rip") {
+            message.guild.channels
+                .create(`${type}-${projectName}`, {
+                    reason: `${type}`,
+                    type: "text",
+                    parent: process.env.RIPS_CATEGORY_ID,
+                    topic: `A ${type} channel for ${projectName}.`,
+                    permissionOverwrites: channelPermissions,
+                })
+                .then((channel) => channel.send(welcomeMessage))
+                .catch(console.error);
+        }
     },
 };

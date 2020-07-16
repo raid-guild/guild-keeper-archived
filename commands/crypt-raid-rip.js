@@ -13,8 +13,9 @@ module.exports = {
         }
 
         if (
-            message.channel.parentID == process.env.BATTLEFIELD_ID ||
-            message.channel.parentID == process.env.CLIENT_CHAT_ID
+            message.channel.parentID == process.env.RAIDS_CATEGORY_ID ||
+            message.channel.parentID == process.env.RIPS_CATEGORY_ID ||
+            message.channel.parentID == process.env.PREPPING_FOR_BATTLE_ID
         ) {
             message.channel.setParent(category.id);
             message.channel.send(
