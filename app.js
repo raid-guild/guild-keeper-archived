@@ -17,6 +17,7 @@ const { PREFIX, HELP_MESSAGE } = constants;
 // Route imports
 const PAYLOAD_ROUTER = require("./routes/payload");
 const DAOSHOP_ROUTER = require("./routes/daoshop");
+const HIREUS_ROUTER = require("./routes/hireus");
 const TWITTER_ROUTER = require("./routes/twitter");
 
 // Airtable Configuration
@@ -26,6 +27,8 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
+let raidcentral_base = Airtable.base(process.env.RAID_CENTRAL_BASE_ID);
+let hireus_backup_base = Airtable.base(process.env.HIREUS_BACKUP_BASE_ID);
 var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
 var treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
 
@@ -48,6 +51,15 @@ app.use(
         next();
     },
     DAOSHOP_ROUTER
+);
+app.use(
+    "/hireus",
+    (req, res, next) => {
+        req.RAID_CENTRAL_BASE = raidcentral_base;
+        req.HIREUS_BACKUP_BASE = hireus_backup_base;
+        next();
+    },
+    HIREUS_ROUTER
 );
 app.use(
     "/twitter",
