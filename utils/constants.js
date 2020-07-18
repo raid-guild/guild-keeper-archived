@@ -7,6 +7,7 @@ const HELP_MESSAGE =
     "\t📍 `crypt` -- Crypts an raid/rip/client channel under the battlefield and client chat category.\n" +
     "\t📍 `registry` -- Used to add or update your info in the registry.\n" +
     "\t📍 `treasury` -- Used to record a direct fund transfer to the guild.\n" +
+    "\t📍 `quest` -- Used to record different types of quests completed by RG Members & Apprentices.\n" +
     "\n🛡 **READ ONLY COMMANDS**\n" +
     "\t📍 `role-stats` -- Returns number of people assigned to each role.\n" +
     "\n🛡 **HOW TO COMMANDS**\n" +

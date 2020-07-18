@@ -29,6 +29,7 @@ Airtable.configure({
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
 let raidcentral_base = Airtable.base(process.env.RAID_CENTRAL_BASE_ID);
 let hireus_backup_base = Airtable.base(process.env.HIREUS_BACKUP_BASE_ID);
+var quests_base = Airtable.base(process.env.QUESTS_BASE_ID);
 var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
 var treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
 
@@ -100,13 +101,18 @@ client.on("ready", async () => {
 client.on("message", (message) => {
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-    if (
-        !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
-    )
-        return message.channel.send("Only Members can command me!");
-
     let args = message.content.slice(PREFIX.length).split(/ +/);
     let command = args[1];
+
+    if (
+        !message.member.roles.member._roles.includes(
+            process.env.MEMBER_ROLE_ID
+        ) &&
+        !(command === "quest")
+    )
+        return message.channel.send(
+            "Only Raid Guild Members can use that command."
+        );
 
     if (
         args.length == 2 &&
@@ -157,6 +163,10 @@ client.on("message", (message) => {
             return client.commands
                 .get("treasury")
                 .execute(message, treasury_base);
+        case "quest":
+            return client.commands
+                .get("quest")
+                .execute(message, args, quests_base);
         case "gas-info":
             return client.commands.get("gas-info").execute(message, axios);
         default:

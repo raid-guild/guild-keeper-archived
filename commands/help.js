@@ -12,6 +12,7 @@ module.exports = {
         const REGISTRY = `🗡 To add or update your information in the registry, use **!keeper registry [options]**. Options include \n1. email/[your email]\n2. eth/[your eth address]\n3. ens/[your ens address]\n4. telegram/[your telegram handle]\n5. twitter/[your twitter handle]\n6. github/[your github username]\n\nFor example, to add or update your eth address, use **!keeper registry eth/[address]** or if you want to add or update more than one info, chain options like **!keeper registry eth/[address] twitter/[handle]**`;
         const TREASURY = `🗡 To record a direct transfer into the DAO bank, use **!keeper treasury "brief description" etherscan-link**.\n_Note: Quotation marks "" are required enclosing the "description"._`;
         const GAS_INFO = `🗡 Returns the live gas price stats.`;
+        const QUEST = `🗡 Used to record different types of quests completed by RG Members & Apprentices. We got three quest types.\n\t📍 **tweet** - Tweet, Shill or Retweet about Raid Guild.\n\t📍 **article** - Writings related to Raid Guild.\n\t📍 **issue** - Successful completion of an issue created in _#apprentice-issue-alerts_ or an external bounty completion acknowledged by Raid Guild.\nTo register a quest, use **!keeper quest <quest-type> <link-to-it>**`;
 
         if (args.length < 3)
             return message.channel.send("Missing command! Help with what?");
@@ -37,6 +38,8 @@ module.exports = {
                 return message.channel.send(TREASURY);
             case "gas-info":
                 return message.channel.send(GAS_INFO);
+            case "quest":
+                return message.channel.send(QUEST);
             default:
                 return message.channel.send(
                     "Hmm.. I don't know what that command does. Check `!keeper help`"
