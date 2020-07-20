@@ -150,9 +150,7 @@ client.on("message", (message) => {
                     process.env.MEMBER_ROLE_ID
                 );
         case "crypt":
-            return client.commands
-                .get("crypt-raid-rip")
-                .execute(message, process.env.MEMBER_ROLE_ID);
+            return client.commands.get("crypt-raid-rip").execute(message);
         case "role-stats":
             return client.commands.get("role-stats").execute(message);
         case "registry":
