@@ -48,6 +48,7 @@ app.use(
 app.use(
     "/daoshop",
     (req, res, next) => {
+        req.CLIENT = client;
         req.DAOSHOP_BASE = daoshop_base;
         next();
     },
