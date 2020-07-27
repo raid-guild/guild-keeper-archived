@@ -3,6 +3,7 @@ const express = require("express");
 const RAIDS_ROUTER = express.Router();
 
 RAIDS_ROUTER.post("/", async (req, res) => {
+    if (req.body.ID == "") return res.json("NOT_FOUND");
     await req
         .DUPLICATE_RAIDS_BASE("Raids")
         .find(req.body.ID, function (err, record) {
