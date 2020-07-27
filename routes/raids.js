@@ -8,7 +8,7 @@ RAIDS_ROUTER.post("/", async (req, res) => {
         .find(req.body.ID, function (err, record) {
             if (err) {
                 if (err.error === "NOT_FOUND") {
-                    res.send(err.error);
+                    res.json(err.error);
                 }
                 return;
             }
