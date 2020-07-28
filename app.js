@@ -28,7 +28,6 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
-let raidcentral_base = Airtable.base(process.env.RAID_CENTRAL_BASE_ID);
 let hireus_backup_base = Airtable.base(process.env.HIREUS_BACKUP_BASE_ID);
 var quests_base = Airtable.base(process.env.QUESTS_BASE_ID);
 var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
@@ -59,7 +58,7 @@ app.use(
 app.use(
     "/hireus",
     (req, res, next) => {
-        req.RAID_CENTRAL_BASE = raidcentral_base;
+        req.DUPLICATE_RAIDS_BASE = duplicate_raids;
         req.HIREUS_BACKUP_BASE = hireus_backup_base;
         next();
     },

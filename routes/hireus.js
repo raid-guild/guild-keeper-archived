@@ -21,7 +21,7 @@ HIREUS_ROUTER.post("/airtable", async (req, res) => {
         transaction_hash,
     } = req.body;
 
-    await req.RAID_CENTRAL_BASE("Raids").create(
+    await req.DUPLICATE_RAIDS_BASE("Raids").create(
         [
             {
                 fields: {
@@ -34,7 +34,7 @@ HIREUS_ROUTER.post("/airtable", async (req, res) => {
                     "Budget Allocated": budget,
                     "Your Name": name,
                     "Email Address": email,
-                    "Telegram handle": handle,
+                    "Telegram Handle": handle,
                     "Relevant Link": link,
                     "Desired date of completion": completion_date,
                     "How did you hear about the Guild?": about_guild,
@@ -87,7 +87,7 @@ HIREUS_ROUTER.post("/backup", async (req, res) => {
                     "Budget Allocated": budget,
                     "Your Name": name,
                     "Email Address": email,
-                    "Telegram handle": handle,
+                    "Telegram Handle": handle,
                     "Relevant Link": link,
                     "Desired date of completion": completion_date,
                     "How did you hear about the Guild?": about_guild,
