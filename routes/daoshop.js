@@ -20,65 +20,6 @@ DAOSHOP_ROUTER.post("/airtable", async (req, res) => {
         transaction_hash,
     } = req.body;
 
-    let discord_message =
-        "We got a daoshop client submission" +
-        "\n\n" +
-        `📍**Project Name**` +
-        "\n" +
-        `${project_name}` +
-        "\n\n" +
-        `📍**Summary**` +
-        "\n" +
-        `${summary}` +
-        "\n\n" +
-        `📍**Specs**` +
-        "\n" +
-        `${specs}` +
-        "\n\n" +
-        `📍**Client Name**` +
-        "\n" +
-        `${name}` +
-        "\n\n" +
-        `📍**Email**` +
-        "\n" +
-        `${email}` +
-        "\n\n" +
-        `📍**Social Handle**` +
-        "\n" +
-        `${handle}` +
-        "\n\n" +
-        `📍**How did you hear about the guild**` +
-        "\n" +
-        `${about_guild}` +
-        "\n\n" +
-        `📍**Anything else the guild should know**` +
-        "\n" +
-        `${to_know}` +
-        "\n\n" +
-        `📍**Time Slot 1**` +
-        "\n" +
-        `${slot_1}` +
-        "\n\n" +
-        `📍**Time Slot 2**` +
-        "\n" +
-        `${slot_2}` +
-        "\n\n" +
-        `📍**Time Slot 3**` +
-        "\n" +
-        `${slot_3}` +
-        "\n\n" +
-        `📍**Transaction Hash**` +
-        "\n" +
-        `${transaction_hash}` +
-        "\n\n"`📍**Skills Required**` +
-        "\n" +
-        `${skills_needed}`;
-
-    req.CLIENT.guilds.cache
-        .get(process.env.GUILD_ID)
-        .channels.cache.get(process.env.DAOSHOP_CHANNEL_ID)
-        .send(discord_message);
-
     await req.DAOSHOP_BASE("Clients").create(
         [
             {
@@ -126,7 +67,66 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
         slot_1,
         slot_2,
         slot_3,
+        transaction_hash,
     } = req.body;
+
+    let discord_message =
+        `📍**Project Name**` +
+        "\n" +
+        `${project_name}` +
+        "\n\n" +
+        `📍**Summary**` +
+        "\n" +
+        `${summary}` +
+        "\n\n" +
+        `📍**Specs**` +
+        "\n" +
+        `${specs}` +
+        "\n\n" +
+        `📍**Client Name**` +
+        "\n" +
+        `${name}` +
+        "\n\n" +
+        `📍**Email**` +
+        "\n" +
+        `${email}` +
+        "\n\n" +
+        `📍**Social Handle**` +
+        "\n" +
+        `${handle}` +
+        "\n\n" +
+        `📍**How did you hear about the guild**` +
+        "\n" +
+        `${about_guild}` +
+        "\n\n" +
+        `📍**Anything else the guild should know**` +
+        "\n" +
+        `${to_know}` +
+        "\n\n" +
+        `📍**Time Slot 1**` +
+        "\n" +
+        `${slot_1}` +
+        "\n\n" +
+        `📍**Time Slot 2**` +
+        "\n" +
+        `${slot_2}` +
+        "\n\n" +
+        `📍**Time Slot 3**` +
+        "\n" +
+        `${slot_3}` +
+        "\n\n" +
+        `📍**Transaction Hash**` +
+        "\n" +
+        `${transaction_hash}` +
+        "\n\n" +
+        `📍**Skills Required**` +
+        "\n" +
+        `${skills_needed}`;
+
+    req.CLIENT.guilds.cache
+        .get(process.env.GUILD_ID)
+        .channels.cache.get(process.env.DAOSHOP_CHANNEL_ID)
+        .send(discord_message);
 
     const client = new Clients({
         project_name,
@@ -141,6 +141,7 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
         slot_1,
         slot_2,
         slot_3,
+        transaction_hash,
     });
 
     client
