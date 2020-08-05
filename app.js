@@ -20,6 +20,7 @@ const DAOSHOP_ROUTER = require("./routes/daoshop");
 const HIREUS_ROUTER = require("./routes/hireus");
 const TWITTER_ROUTER = require("./routes/twitter");
 const RAIDS_ROUTER = require("./routes/raids");
+const MEMBERS_ROUTER = require("./routes/members");
 
 // Airtable Configuration
 Airtable.configure({
@@ -28,11 +29,11 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
-let hireus_backup_base = Airtable.base(process.env.HIREUS_BACKUP_BASE_ID);
 var quests_base = Airtable.base(process.env.QUESTS_BASE_ID);
 var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
 var treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
 var duplicate_raids = Airtable.base(process.env.DUPLICATE_RAIDS_BASE_ID);
+var raid_central_v2_base = Airtable.base(process.env.RAID_CENTRAL_V2_BASE_ID);
 
 // Express server section
 const app = express();
@@ -59,7 +60,6 @@ app.use(
     "/hireus",
     (req, res, next) => {
         req.DUPLICATE_RAIDS_BASE = duplicate_raids;
-        req.HIREUS_BACKUP_BASE = hireus_backup_base;
         next();
     },
     HIREUS_ROUTER
@@ -79,6 +79,14 @@ app.use(
         next();
     },
     TWITTER_ROUTER
+);
+app.use(
+    "/members",
+    (req, res, next) => {
+        req.RAID_CENTRAL_V2_BASE = raid_central_v2_base;
+        next();
+    },
+    MEMBERS_ROUTER
 );
 app.get("/", (req, res) => {
     res.send("Hi");
