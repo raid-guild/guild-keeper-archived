@@ -1,4 +1,5 @@
 const express = require("express");
+const Raids = require("../models/raids_schema");
 
 const HIREUS_ROUTER = express.Router();
 
@@ -21,7 +22,7 @@ HIREUS_ROUTER.post("/airtable", async (req, res) => {
         transaction_hash,
     } = req.body;
 
-    await req.DUPLICATE_RAIDS_BASE("Raids").create(
+    await req.RAID_CENTRAL_V2_BASE("Raids").create(
         [
             {
                 fields: {
@@ -39,7 +40,7 @@ HIREUS_ROUTER.post("/airtable", async (req, res) => {
                     "Desired date of completion": completion_date,
                     "How did you hear about the Guild?": about_guild,
                     "Anything else you'd like the Guild to know?": to_know,
-                    "Transaction Hash": transaction_hash,
+                    "Consultation Hash": transaction_hash,
                 },
             },
         ],
@@ -54,6 +55,120 @@ HIREUS_ROUTER.post("/airtable", async (req, res) => {
             });
         }
     );
+});
+
+HIREUS_ROUTER.post("/mongo", async (req, res) => {
+    let {
+        project_name,
+        project_type,
+        summary,
+        specs,
+        skills_needed,
+        priorities,
+        budget,
+        name,
+        email,
+        handle,
+        link,
+        completion_date,
+        about_guild,
+        to_know,
+        transaction_hash,
+    } = req.body;
+
+    let discord_message =
+        `📍**Project Name**` +
+        "\n" +
+        `${project_name}` +
+        "\n\n" +
+        `📍**Project Type**` +
+        "\n" +
+        `${project_type}` +
+        "\n\n" +
+        `📍**Summary**` +
+        "\n" +
+        `${summary}` +
+        "\n\n" +
+        `📍**Specs**` +
+        "\n" +
+        `${specs}` +
+        "\n\n" +
+        `📍**Budget**` +
+        "\n" +
+        `${budget}` +
+        "\n\n" +
+        `📍**Client Name**` +
+        "\n" +
+        `${name}` +
+        "\n\n" +
+        `📍**Email**` +
+        "\n" +
+        `${email}` +
+        "\n\n" +
+        `📍**Social Handle**` +
+        "\n" +
+        `${handle}` +
+        "\n\n" +
+        `📍**Relevant Link**` +
+        "\n" +
+        `${link}` +
+        "\n\n" +
+        `📍**Desired Date of Completion**` +
+        "\n" +
+        `${completion_date}` +
+        "\n\n" +
+        `📍**How did you hear about the guild**` +
+        "\n" +
+        `${about_guild}` +
+        "\n\n" +
+        `📍**Anything else the guild should know**` +
+        "\n" +
+        `${to_know}` +
+        "\n\n" +
+        `📍**Transaction Hash**` +
+        "\n" +
+        `${transaction_hash}` +
+        "\n\n" +
+        `📍**Priorities**` +
+        "\n" +
+        `${priorities}` +
+        "\n\n" +
+        `📍**Skills Required**` +
+        "\n" +
+        `${skills_needed}`;
+
+    req.CLIENT.guilds.cache
+        .get(process.env.GUILD_ID)
+        .channels.cache.get(process.env.CLIENT_SUBMISSION_CHANNEL_ID)
+        .send(discord_message);
+
+    const raid = new Raids({
+        project_name,
+        project_type,
+        summary,
+        specs,
+        skills_needed,
+        priorities,
+        budget,
+        name,
+        email,
+        handle,
+        link,
+        completion_date,
+        about_guild,
+        to_know,
+        transaction_hash,
+    });
+
+    raid.save()
+        .then((data) => {
+            console.log("Success - Mongo");
+            res.send("Success - Mongo");
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send("Error - Mongo");
+        });
 });
 
 module.exports = HIREUS_ROUTER;

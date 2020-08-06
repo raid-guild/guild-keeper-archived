@@ -20,7 +20,6 @@ const DAOSHOP_ROUTER = require("./routes/daoshop");
 const HIREUS_ROUTER = require("./routes/hireus");
 const TWITTER_ROUTER = require("./routes/twitter");
 const RAIDS_ROUTER = require("./routes/raids");
-const MEMBERS_ROUTER = require("./routes/members");
 
 // Airtable Configuration
 Airtable.configure({
@@ -59,7 +58,8 @@ app.use(
 app.use(
     "/hireus",
     (req, res, next) => {
-        req.DUPLICATE_RAIDS_BASE = duplicate_raids;
+        req.CLIENT = client;
+        req.RAID_CENTRAL_V2_BASE = raid_central_v2_base;
         next();
     },
     HIREUS_ROUTER
@@ -79,14 +79,6 @@ app.use(
         next();
     },
     TWITTER_ROUTER
-);
-app.use(
-    "/members",
-    (req, res, next) => {
-        req.RAID_CENTRAL_V2_BASE = raid_central_v2_base;
-        next();
-    },
-    MEMBERS_ROUTER
 );
 app.get("/", (req, res) => {
     res.send("Hi");
