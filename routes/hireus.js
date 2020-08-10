@@ -77,65 +77,19 @@ HIREUS_ROUTER.post("/mongo", async (req, res) => {
     } = req.body;
 
     let discord_message =
-        `📍**Project Name**` +
+        `**New Client Submission Received** - ${project_name}(https://etherscan.io/tx/${transaction_hash}) is a ${project_type} from ${name} with a budget of ${budget}. The client expects a delivery date of ${completion_date} and has provided the following information.` +
         "\n" +
-        `${project_name}` +
-        "\n\n" +
-        `📍**Project Type**` +
+        `**Summary** - ${summary}` +
         "\n" +
-        `${project_type}` +
-        "\n\n" +
-        `📍**Summary**` +
+        `**Specs** - ${specs}` +
         "\n" +
-        `${summary}` +
-        "\n\n" +
-        `📍**Specs**` +
+        `**Skills Required** - ${skills_needed}` +
         "\n" +
-        `${specs}` +
-        "\n\n" +
-        `📍**Budget**` +
+        `**Priorities** - ${priorities}` +
         "\n" +
-        `${budget}` +
-        "\n\n" +
-        `📍**Client Name**` +
+        `**Relevant Link** - ${link}` +
         "\n" +
-        `${name}` +
-        "\n\n" +
-        `📍**Email**` +
-        "\n" +
-        `${email}` +
-        "\n\n" +
-        `📍**Social Handle**` +
-        "\n" +
-        `${handle}` +
-        "\n\n" +
-        `📍**Relevant Link**` +
-        "\n" +
-        `${link}` +
-        "\n\n" +
-        `📍**Desired Date of Completion**` +
-        "\n" +
-        `${completion_date}` +
-        "\n\n" +
-        `📍**How did you hear about the guild**` +
-        "\n" +
-        `${about_guild}` +
-        "\n\n" +
-        `📍**Anything else the guild should know**` +
-        "\n" +
-        `${to_know}` +
-        "\n\n" +
-        `📍**Transaction Hash**` +
-        "\n" +
-        `${transaction_hash}` +
-        "\n\n" +
-        `📍**Priorities**` +
-        "\n" +
-        `${priorities}` +
-        "\n\n" +
-        `📍**Skills Required**` +
-        "\n" +
-        `${skills_needed}`;
+        `**Contact** - [${email}][${handle}]`;
 
     req.CLIENT.guilds.cache
         .get(process.env.GUILD_ID)
