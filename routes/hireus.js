@@ -77,7 +77,7 @@ HIREUS_ROUTER.post("/mongo", async (req, res) => {
     } = req.body;
 
     let discord_message =
-        `**New Client Submission Received** - ${project_name}(https://etherscan.io/tx/${transaction_hash}) is a ${project_type} from ${name} with a budget of ${budget}. The client expects a delivery date of ${completion_date} and has provided the following information.` +
+        `**New Client Submission Received** - ${project_name} (https://etherscan.io/tx/${transaction_hash}) is a ${project_type} from ${name} with a budget of ${budget}. The client expects a delivery date of ${completion_date} and has provided the following information.` +
         "\n" +
         `**Summary** - ${summary}` +
         "\n" +
