@@ -71,57 +71,15 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
     } = req.body;
 
     let discord_message =
-        `📍**Project Name**` +
+        `**New DAOShop Submission Received** - ${project_name} (https://etherscan.io/tx/${transaction_hash}) from ${name}. The client has provided the following information.` +
         "\n" +
-        `${project_name}` +
-        "\n\n" +
-        `📍**Summary**` +
+        `**Specs** - ${specs}` +
         "\n" +
-        `${summary}` +
-        "\n\n" +
-        `📍**Specs**` +
+        `**Skills Required** - ${skills_needed}` +
         "\n" +
-        `${specs}` +
-        "\n\n" +
-        `📍**Client Name**` +
+        `**Contact** - [${email}][${handle}]` +
         "\n" +
-        `${name}` +
-        "\n\n" +
-        `📍**Email**` +
-        "\n" +
-        `${email}` +
-        "\n\n" +
-        `📍**Social Handle**` +
-        "\n" +
-        `${handle}` +
-        "\n\n" +
-        `📍**How did you hear about the guild**` +
-        "\n" +
-        `${about_guild}` +
-        "\n\n" +
-        `📍**Anything else the guild should know**` +
-        "\n" +
-        `${to_know}` +
-        "\n\n" +
-        `📍**Time Slot 1**` +
-        "\n" +
-        `${slot_1}` +
-        "\n\n" +
-        `📍**Time Slot 2**` +
-        "\n" +
-        `${slot_2}` +
-        "\n\n" +
-        `📍**Time Slot 3**` +
-        "\n" +
-        `${slot_3}` +
-        "\n\n" +
-        `📍**Transaction Hash**` +
-        "\n" +
-        `${transaction_hash}` +
-        "\n\n" +
-        `📍**Skills Required**` +
-        "\n" +
-        `${skills_needed}`;
+        `**Preferred Consultation Times** - [${slot_1}][${slot_2}][${slot_3}]`;
 
     req.CLIENT.guilds.cache
         .get(process.env.GUILD_ID)
