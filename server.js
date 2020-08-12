@@ -70,6 +70,8 @@ app.get("/", (req, res) => {
     res.send("Hi");
 });
 
+client.login(process.env.TOKEN);
+
 app.listen(process.env.PORT || 5000, () => console.log("Listening.."));
 
 mongoose.connect(
