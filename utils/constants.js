@@ -2,16 +2,10 @@ const PREFIX = "!keeper";
 const HELP_MESSAGE =
     "WELCOME! HOW MAY I HELP?\n\n" +
     "🛡 **ACTIONABLE COMMANDS**\n" +
-    "\t📍 `create-raid` -- Creates a raid channel and initializes it.\n" +
-    "\t📍 `create-rip` -- Creates a rip channel and initializes it.\n" +
-    "\t📍 `crypt` -- Crypts an raid/rip/client channel under the battlefield and client chat category.\n" +
-    "\t📍 `registry` -- Used to add or update your info in the registry.\n" +
+    "\t📍 `crypt` -- Crypts any channel.\n" +
     "\t📍 `treasury` -- Used to record a direct fund transfer to the guild.\n" +
-    "\t📍 `quest` -- Used to record different types of quests completed by RG Members & Apprentices.\n" +
     "\n🛡 **READ ONLY COMMANDS**\n" +
     "\t📍 `role-stats` -- Returns number of people assigned to each role.\n" +
-    "\n🛡 **HOW TO COMMANDS**\n" +
-    "\t📍 `apprentice-issue` -- Provides information on how to set a repo for apprentice issues to be posted on _#apprentice-issue-alerts_.\n" +
     "\n🛡 **UTILITY COMMANDS**\n" +
     "\t📍 `gas-info` -- Returns live gas prices.\n" +
     "\n**USING ACTIONABLE COMMANDS**\n" +

@@ -28,11 +28,9 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
-var quests_base = Airtable.base(process.env.QUESTS_BASE_ID);
-var registry_base = Airtable.base(process.env.REGISTRY_BASE_ID);
-var treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
-var duplicate_raids = Airtable.base(process.env.DUPLICATE_RAIDS_BASE_ID);
-var raid_central_v2_base = Airtable.base(process.env.RAID_CENTRAL_V2_BASE_ID);
+let treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
+let duplicate_raids = Airtable.base(process.env.DUPLICATE_RAIDS_BASE_ID);
+let raid_central_v2_base = Airtable.base(process.env.RAID_CENTRAL_V2_BASE_ID);
 
 // Express server section
 const app = express();
@@ -110,19 +108,15 @@ client.on("ready", async () => {
 // Bot on message
 client.on("message", (message) => {
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
-
-    let args = message.content.slice(PREFIX.length).split(/ +/);
-    let command = args[1];
-
     if (
-        !message.member.roles.member._roles.includes(
-            process.env.MEMBER_ROLE_ID
-        ) &&
-        !(command === "quest")
+        !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
     )
         return message.channel.send(
             "Only Raid Guild Members can use that command."
         );
+
+    let args = message.content.slice(PREFIX.length).split(/ +/);
+    let command = args[1];
 
     if (
         args.length == 2 &&
@@ -131,50 +125,17 @@ client.on("message", (message) => {
     )
         return message.channel.send(HELP_MESSAGE);
 
-    if (
-        args.length <= 3 &&
-        message.content.startsWith(PREFIX) &&
-        args[1] === "how-to"
-    )
-        return client.commands.get("how-to").execute(message, args);
-
     switch (command) {
         case "help":
             return client.commands.get("help").execute(message, args);
-        case "create-raid":
-            return client.commands
-                .get("create-raid-rip")
-                .execute(
-                    message,
-                    args,
-                    process.env.BOT_ID,
-                    process.env.MEMBER_ROLE_ID
-                );
-        case "create-rip":
-            return client.commands
-                .get("create-raid-rip")
-                .execute(
-                    message,
-                    args,
-                    process.env.BOT_ID,
-                    process.env.MEMBER_ROLE_ID
-                );
         case "crypt":
-            return client.commands.get("crypt-raid-rip").execute(message);
+            return client.commands.get("crypt").execute(message);
         case "role-stats":
             return client.commands.get("role-stats").execute(message);
-        case "registry":
-            return client.commands
-                .get("registry")
-                .execute(message, args, registry_base);
         case "treasury":
             return client.commands
                 .get("treasury")
                 .execute(message, treasury_base);
-        case "quest":
-            return client.commands
-                .get("quest")
-                .execute(message, args, quests_base);
         case "gas-info":
             return client.commands.get("gas-info").execute(message, axios);
         default:
