@@ -2,11 +2,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const Airtable = require("airtable");
-const express = require("express");
-const mongoose = require("mongoose");
 const axios = require("axios");
 const fs = require("fs");
-const cors = require("cors");
 
 require("dotenv").config();
 
@@ -14,73 +11,13 @@ require("dotenv").config();
 const constants = require("./utils/constants");
 const { PREFIX, HELP_MESSAGE } = constants;
 
-// Route imports
-const PAYLOAD_ROUTER = require("./routes/payload");
-const DAOSHOP_ROUTER = require("./routes/daoshop");
-const HIREUS_ROUTER = require("./routes/hireus");
-const TWITTER_ROUTER = require("./routes/twitter");
-const RAIDS_ROUTER = require("./routes/raids");
-
 // Airtable Configuration
 Airtable.configure({
     endpointUrl: "https://api.airtable.com",
     apiKey: process.env.API_KEY,
 });
 
-let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
 let treasury_base = Airtable.base(process.env.TREASURY_BASE_ID);
-let duplicate_raids = Airtable.base(process.env.DUPLICATE_RAIDS_BASE_ID);
-let raid_central_v2_base = Airtable.base(process.env.RAID_CENTRAL_V2_BASE_ID);
-
-// Express server section
-const app = express();
-app.use(express.json());
-app.use(cors());
-app.use(
-    "/payload",
-    (req, res, next) => {
-        req.CLIENT = client;
-        next();
-    },
-    PAYLOAD_ROUTER
-);
-app.use(
-    "/daoshop",
-    (req, res, next) => {
-        req.CLIENT = client;
-        req.DAOSHOP_BASE = daoshop_base;
-        next();
-    },
-    DAOSHOP_ROUTER
-);
-app.use(
-    "/hireus",
-    (req, res, next) => {
-        req.CLIENT = client;
-        req.RAID_CENTRAL_V2_BASE = raid_central_v2_base;
-        next();
-    },
-    HIREUS_ROUTER
-);
-app.use(
-    "/raids",
-    (req, res, next) => {
-        req.DUPLICATE_RAIDS_BASE = duplicate_raids;
-        next();
-    },
-    RAIDS_ROUTER
-);
-app.use(
-    "/twitter",
-    (req, res, next) => {
-        req.CLIENT = client;
-        next();
-    },
-    TWITTER_ROUTER
-);
-app.get("/", (req, res) => {
-    res.send("Hi");
-});
 
 // Command files configuration
 client.commands = new Discord.Collection();
@@ -95,14 +32,7 @@ for (const file of commandFiles) {
 // Bot on ready
 client.on("ready", async () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    app.listen(process.env.PORT || 5000, () => console.log("Listening.."));
-    mongoose.connect(
-        process.env.MONGODB_CONNECTION,
-        { useNewUrlParser: true, useUnifiedTopology: true },
-        () => {
-            console.log("Connected to database..");
-        }
-    );
+    require("./server");
 });
 
 // Bot on message
@@ -111,9 +41,7 @@ client.on("message", (message) => {
     if (
         !message.member.roles.member._roles.includes(process.env.MEMBER_ROLE_ID)
     )
-        return message.channel.send(
-            "Only Raid Guild Members can use that command."
-        );
+        return message.channel.send("Access restricted to members.");
 
     let args = message.content.slice(PREFIX.length).split(/ +/);
     let command = args[1];
@@ -122,22 +50,36 @@ client.on("message", (message) => {
         args.length == 2 &&
         message.content.startsWith(PREFIX) &&
         args[1] === "help"
-    )
-        return message.channel.send(HELP_MESSAGE);
+    ) {
+        let embed = new Discord.MessageEmbed()
+
+            .setDescription(
+                "Welcome Guilder. I do a lot of automation for the guild and below are some of my visible executable commands that you can use."
+            )
+            .setColor("#ff3864")
+
+            .addFields(HELP_MESSAGE)
+            .setFooter(
+                "For more information about a command, use !keeper help <command>"
+            );
+        return message.channel.send(embed);
+    }
 
     switch (command) {
         case "help":
-            return client.commands.get("help").execute(message, args);
+            return client.commands.get("help").execute(Discord, message, args);
         case "crypt":
             return client.commands.get("crypt").execute(message);
         case "role-stats":
-            return client.commands.get("role-stats").execute(message);
+            return client.commands.get("role-stats").execute(Discord, message);
         case "treasury":
             return client.commands
                 .get("treasury")
                 .execute(message, treasury_base);
         case "gas-info":
-            return client.commands.get("gas-info").execute(message, axios);
+            return client.commands
+                .get("gas-info")
+                .execute(Discord, message, axios);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."
