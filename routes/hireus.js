@@ -76,23 +76,65 @@ HIREUS_ROUTER.post("/mongo", async (req, res) => {
         transaction_hash,
     } = req.body;
 
-    let discord_message =
-        `**New Client Submission Received** - ${project_name} (https://etherscan.io/tx/${transaction_hash}) is a ${project_type} from ${name} with a budget of ${budget}. The client expects a delivery date of ${completion_date} and has provided the following information.` +
-        "\n" +
-        `**Specs** - ${specs}` +
-        "\n" +
-        `**Skills Required** - ${skills_needed}` +
-        "\n" +
-        `**Priorities** - ${priorities}` +
-        "\n" +
-        `**Relevant Link** - ${link}` +
-        "\n" +
-        `**Contact** - [${email}][${handle}]`;
+    let Discord = req.DISCORD;
+    let embed = new Discord.MessageEmbed()
+        .setColor("#ff3864")
+        .setTitle(project_name)
+        .setURL(`https://etherscan.io/tx/${transaction_hash}`)
+        .setAuthor(name)
+        .addFields(
+            {
+                name: "Project Type",
+                value: project_type,
+            },
+            {
+                name: "Budget",
+                value: budget,
+            },
+            {
+                name: "Specs",
+                value: specs,
+            },
+            {
+                name: "Skills Needed",
+                value: skills_needed,
+            },
+            {
+                name: "Priorities",
+                value: priorities,
+            },
+            {
+                name: "Relevant Link",
+                value: link,
+            },
+            {
+                name: "Contact",
+                value: `[${email}][${handle}]`,
+            },
+            {
+                name: "Expected Delivery Date",
+                value: completion_date,
+            }
+        )
+        .setTimestamp();
+
+    // let discord_message =
+    //     `**New Client Submission Received** - ${project_name} (https://etherscan.io/tx/${transaction_hash}) is a ${project_type} from ${name} with a budget of ${budget}. The client expects a delivery date of ${completion_date} and has provided the following information.` +
+    //     "\n" +
+    //     `**Specs** - ${specs}` +
+    //     "\n" +
+    //     `**Skills Required** - ${skills_needed}` +
+    //     "\n" +
+    //     `**Priorities** - ${priorities}` +
+    //     "\n" +
+    //     `**Relevant Link** - ${link}` +
+    //     "\n" +
+    //     `**Contact** - [${email}][${handle}]`;
 
     req.CLIENT.guilds.cache
         .get(process.env.GUILD_ID)
         .channels.cache.get(process.env.CLIENT_SUBMISSION_CHANNEL_ID)
-        .send(discord_message);
+        .send(embed);
 
     const raid = new Raids({
         project_name,
