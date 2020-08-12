@@ -1,8 +1,8 @@
 module.exports = {
     name: "role-stats",
     description: "Returns total members in each role",
-    execute(message) {
-        let returnMessage = "";
+    execute(Discord, message) {
+        let roles = [];
         let filterRoles = [
             "@everyone",
             "nodered",
@@ -15,13 +15,15 @@ module.exports = {
         message.guild.roles.cache.forEach((role) => {
             if (!filterRoles.includes(role.name)) {
                 let count = message.guild.roles.cache.get(role.id).members.size;
-                returnMessage =
-                    returnMessage +
-                    `${role.name} -- _**(${count} people)**_` +
-                    "\n";
+                roles.push({ name: role.name, value: `${count} people` });
             }
         });
 
-        message.channel.send(returnMessage);
+        let embed = new Discord.MessageEmbed()
+            .setColor("#ff3864")
+            .setTimestamp()
+            .addFields(roles);
+
+        message.channel.send(embed);
     },
 };

@@ -10,17 +10,19 @@ PAYLOAD_ROUTER.post("/", (req, res) => {
         let state = req.body.issue.state;
         let label = req.body.label.name;
 
-        let apprentice_issue =
-            "👨‍🎓 New apprentice issue created!\n\n" +
-            `**Title:** ${title}\n` +
-            `**Description:** ${desc}\n` +
-            `**State:** ${state}\n` +
-            `**Issue:** ${issue}`;
+        if (label === "apprentice-issue") {
+            let apprentice_issue =
+                "👨‍🎓 New apprentice issue created!\n\n" +
+                `**Title:** ${title}\n` +
+                `**Description:** ${desc}\n` +
+                `**State:** ${state}\n` +
+                `**Issue:** ${issue}`;
 
-        req.CLIENT.guilds.cache
-            .get(process.env.GUILD_ID)
-            .channels.cache.get("724252185877282936")
-            .send(apprentice_issue);
+            req.CLIENT.guilds.cache
+                .get(process.env.GUILD_ID)
+                .channels.cache.get("724252185877282936")
+                .send(apprentice_issue);
+        }
     }
 
     res.send("Received");

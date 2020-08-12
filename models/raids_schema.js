@@ -1,23 +1,25 @@
 const mongoose = require("mongoose");
 
-const clients_schema = mongoose.Schema({
+const raids_schema = mongoose.Schema({
     project_name: String,
+    project_type: String,
     summary: String,
-    skills_needed: Array,
     specs: String,
+    skills_needed: Array,
+    priorities: Array,
+    budget: Number,
     name: String,
     email: String,
     handle: String,
+    link: String,
+    completion_date: Date,
     about_guild: String,
     to_know: String,
-    slot_1: String,
-    slot_2: String,
-    slot_3: String,
     transaction_hash: String,
-    date: {
+    date_added: {
         type: Date,
         default: Date.now,
     },
 });
 
-module.exports = mongoose.model("Clients", clients_schema);
+module.exports = mongoose.model("Raids", raids_schema);
