@@ -3,7 +3,7 @@ module.exports = {
     description: "Crypts any channel.",
     execute(message) {
         let category = message.guild.channels.cache.find(
-            (c) => c.name == "crypt-090120" && c.type == "category"
+            (c) => c.name == "Valhalla" && c.type == "category"
         );
 
         if (message.channel.parentID == process.env.CRYPT_CHANNEL_ID) {
