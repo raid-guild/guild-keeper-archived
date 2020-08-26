@@ -13,6 +13,10 @@ const HELP_MESSAGE = [
         value: "Returns number of people assigned to each role.",
     },
     {
+        name: "inactive-stats",
+        value: "Returns total inactive members & their usernames.",
+    },
+    {
         name: "gas-info",
         value: "Returns live gas prices.",
     },

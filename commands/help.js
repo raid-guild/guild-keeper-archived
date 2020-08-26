@@ -4,6 +4,7 @@ module.exports = {
     execute(Discord, message, args) {
         const CRYPT = `To crypt one, navigate to the channel you wanna crypt and use **!keeper crypt**.`;
         const ROLE_STATS = `Returns the total number of members assigned to each role.`;
+        const INACTIVE_STATS = `Returns total inactive members & their usernames.`;
         const TREASURY = `To record a direct transfer into the DAO bank, use **!keeper treasury "brief description" etherscan-link**.`;
         const GAS_INFO = `Returns the live gas price stats.`;
 
@@ -23,6 +24,13 @@ module.exports = {
                     new Discord.MessageEmbed()
 
                         .setDescription(ROLE_STATS)
+                        .setColor("#ff3864")
+                );
+            case "inactive-stats":
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+
+                        .setDescription(INACTIVE_STATS)
                         .setColor("#ff3864")
                 );
             case "treasury":

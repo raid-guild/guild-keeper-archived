@@ -72,6 +72,10 @@ client.on("message", (message) => {
             return client.commands.get("crypt").execute(message);
         case "role-stats":
             return client.commands.get("role-stats").execute(Discord, message);
+        case "inactive-stats":
+            return client.commands
+                .get("inactive-stats")
+                .execute(Discord, message);
         case "treasury":
             return client.commands
                 .get("treasury")
