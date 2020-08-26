@@ -4,7 +4,7 @@ module.exports = {
     execute(Discord, message) {
         let members = [];
         message.guild.roles.cache
-            .get("718378560649166958")
+            .get(process.env.INACTIVE_ROLE_ID)
             .members.forEach((member) => {
                 members.push(member.user.username);
             });
