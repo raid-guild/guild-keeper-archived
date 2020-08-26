@@ -109,6 +109,14 @@ client.on("guildMemberAdd", (member) => {
         welcome_channel.send(message);
     } catch (err) {
         console.log(err);
+        const bot_center_channel = member.guild.channels.get(
+            process.env.BOT_CENTER_CHANNEL_ID
+        );
+        bot_center_channel.send(
+            `There was an error in ${member.guild.channels.cache
+                .get(welcomeId)
+                .toString()}. \n**Error**: ${err}`
+        );
     }
 });
 
