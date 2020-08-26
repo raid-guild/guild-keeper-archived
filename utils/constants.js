@@ -1,8 +1,8 @@
 const PREFIX = "!keeper";
 const HELP_MESSAGE = [
     {
-        name: "crypt",
-        value: "Crypts any channel.",
+        name: "valhalla",
+        value: "Sends a channel to Valhalla.",
     },
     {
         name: "treasury",
