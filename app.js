@@ -68,10 +68,14 @@ client.on("message", (message) => {
     switch (command) {
         case "help":
             return client.commands.get("help").execute(Discord, message, args);
-        case "crypt":
-            return client.commands.get("crypt").execute(message);
+        case "valhalla":
+            return client.commands.get("valhalla").execute(message);
         case "role-stats":
             return client.commands.get("role-stats").execute(Discord, message);
+        case "inactive-stats":
+            return client.commands
+                .get("inactive-stats")
+                .execute(Discord, message);
         case "treasury":
             return client.commands
                 .get("treasury")
@@ -86,5 +90,34 @@ client.on("message", (message) => {
             );
     }
 });
+
+// client.on("guildMemberAdd", (member) => {
+//     const welcomeId = process.env.WELCOME_CHANNEL_ID;
+//     const tavernId = process.env.TAVERN_CHANNEL_ID;
+//     const agoraId = process.env.AGORA_CHANNEL_ID;
+
+//     try {
+//         const message = `RaidGuild welcomes you, <@${
+//             member.id
+//         }! Introduce yourself in ${member.guild.channels.cache
+//             .get(tavernId)
+//             .toString()} & check out ${member.guild.channels.cache
+//             .get(agoraId)
+//             .toString()} for updates & information.`;
+
+//         const welcome_channel = member.guild.channels.cache.get(welcomeId);
+//         welcome_channel.send(message);
+//     } catch (err) {
+//         console.log(err);
+//         const bot_center_channel = member.guild.channels.get(
+//             process.env.BOT_CENTER_CHANNEL_ID
+//         );
+//         bot_center_channel.send(
+//             `There was an error in ${member.guild.channels.cache
+//                 .get(welcomeId)
+//                 .toString()}. \n**Error**: ${err}`
+//         );
+//     }
+// });
 
 client.login(process.env.TOKEN);

@@ -1,8 +1,8 @@
 const PREFIX = "!keeper";
 const HELP_MESSAGE = [
     {
-        name: "crypt",
-        value: "Crypts any channel.",
+        name: "valhalla",
+        value: "Sends a channel to Valhalla.",
     },
     {
         name: "treasury",
@@ -11,6 +11,10 @@ const HELP_MESSAGE = [
     {
         name: "role-stats",
         value: "Returns number of people assigned to each role.",
+    },
+    {
+        name: "inactive-stats",
+        value: "Returns total inactive members & their usernames.",
     },
     {
         name: "gas-info",

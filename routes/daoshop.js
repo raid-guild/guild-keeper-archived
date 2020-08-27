@@ -74,21 +74,21 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
         let Discord = req.DISCORD;
         let embed = new Discord.MessageEmbed()
             .setColor("#ff3864")
-            .setTitle(project_name)
+            .setTitle(project_name || "NaN")
             .setURL(`https://etherscan.io/tx/${transaction_hash}`)
-            .setAuthor(name)
+            .setAuthor(name || "NaN")
             .addFields(
                 {
                     name: "Specs",
-                    value: specs,
+                    value: specs || "NaN",
                 },
                 {
                     name: "Skills Needed",
-                    value: skills_needed,
+                    value: skills_needed || "NaN",
                 },
                 {
                     name: "Contact",
-                    value: `[${email}][${handle}]`,
+                    value: `[${email}][${handle || "NaN"}]`,
                 },
                 {
                     name: "Preferred Consultation Times",
@@ -96,17 +96,6 @@ DAOSHOP_ROUTER.post("/mongo", async (req, res) => {
                 }
             )
             .setTimestamp();
-
-        // let discord_message =
-        //     `**New DAOShop Submission Received** - ${project_name} (https://etherscan.io/tx/${transaction_hash}) from ${name}. The client has provided the following information.` +
-        //     "\n" +
-        //     `**Specs** - ${specs}` +
-        //     "\n" +
-        //     `**Skills Required** - ${skills_needed}` +
-        //     "\n" +
-        //     `**Contact** - [${email}][${handle}]` +
-        //     "\n" +
-        //     `**Preferred Consultation Times** - [${slot_1}][${slot_2}][${slot_3}]`;
 
         req.CLIENT.guilds.cache
             .get(process.env.GUILD_ID)

@@ -38,7 +38,11 @@ app.use(
         req.DISCORD = Discord;
         req.CLIENT = client;
         req.DAOSHOP_BASE = daoshop_base;
-        next();
+        if (req.body.key === process.env.ROUTE_ACCESS_KEY) {
+            next();
+        } else {
+            return res.send("Unauthorized access!");
+        }
     },
     DAOSHOP_ROUTER
 );
@@ -48,7 +52,11 @@ app.use(
         req.DISCORD = Discord;
         req.CLIENT = client;
         req.RAID_CENTRAL_V2_BASE = raid_central_v2_base;
-        next();
+        if (req.body.key === process.env.ROUTE_ACCESS_KEY) {
+            next();
+        } else {
+            return res.send("Unauthorized access!");
+        }
     },
     HIREUS_ROUTER
 );
