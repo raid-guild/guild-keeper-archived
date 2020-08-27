@@ -1,6 +1,18 @@
 const PREFIX = "!keeper";
 const HELP_MESSAGE = [
     {
+        name: "create-raid",
+        value: "Creates a raid channel.",
+    },
+    {
+        name: "create-rip",
+        value: "Creates a rip channel.",
+    },
+    {
+        name: "create-camp",
+        value: "Creates a camp channel.",
+    },
+    {
         name: "valhalla",
         value: "Sends a channel to Valhalla.",
     },

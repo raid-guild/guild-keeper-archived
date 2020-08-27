@@ -2,6 +2,9 @@ module.exports = {
     name: "help",
     description: "Returns the list of available commands for use.",
     execute(Discord, message, args) {
+        const CREATE_RAID = `To create a raid channel, use **!keeper create-raid <project-name> <link-to-proposal> <party-member-1> <party-member-2>**. You don't need to mention yourself as a party member as it's default.`;
+        const CREATE_RIP = `To create a rip channel, use **!keeper create-rip <project-name> <link-to-proposal> <party-member-1> <party-member-2>**. You don't need to mention yourself as a party member as it's default.`;
+        const CREATE_CAMP = `To create a camp channel, use **!keeper create-camp <project-name> <link-to-proposal> <party-member-1> <party-member-2>**. You don't need to mention yourself as a party member as it's default.`;
         const VALHALLA = `To send a channel to Valhalla, use **!keeper valhalla <mention channel>**.`;
         const ROLE_STATS = `Returns the total number of members assigned to each role.`;
         const INACTIVE_STATS = `Returns total inactive members & their usernames.`;
@@ -12,6 +15,27 @@ module.exports = {
             return message.channel.send("Missing command! Help with what?");
 
         switch (args[2]) {
+            case "create-raid":
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+
+                        .setDescription(CREATE_RAID)
+                        .setColor("#ff3864")
+                );
+            case "create-rip":
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+
+                        .setDescription(CREATE_RIP)
+                        .setColor("#ff3864")
+                );
+            case "create-camp":
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+
+                        .setDescription(CREATE_CAMP)
+                        .setColor("#ff3864")
+                );
             case "valhalla":
                 return message.channel.send(
                     new Discord.MessageEmbed()
