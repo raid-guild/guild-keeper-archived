@@ -20,7 +20,7 @@ PAYLOAD_ROUTER.post("/", (req, res) => {
 
             req.CLIENT.guilds.cache
                 .get(process.env.GUILD_ID)
-                .channels.cache.get(process.env.APPRENTICE_ISSUE_DISCUSSION_CHANNEL_ID);
+                .channels.cache.get(process.env.APPRENTICE_ISSUE_DISCUSSION_CHANNEL_ID)
                 .send(embed);
         }
     }
