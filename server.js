@@ -27,6 +27,7 @@ app.use(cors());
 app.use(
     "/payload",
     (req, res, next) => {
+        req.DISCORD = Discord;
         req.CLIENT = client;
         next();
     },
