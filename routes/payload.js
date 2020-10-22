@@ -16,6 +16,7 @@ PAYLOAD_ROUTER.post("/", (req, res) => {
             .setColor("#ff3864")
             .setTitle(title)
             .setURL(issue)
+            .setAuthor('Issue Alert for Apprentice')
             .setTimestamp();
 
             req.CLIENT.guilds.cache
