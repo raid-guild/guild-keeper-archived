@@ -1,11 +1,11 @@
 const express = require("express");
 
-const RAIDS_ROUTER = express.Router();
+const ESCROW_ROUTER = express.Router();
 
-RAIDS_ROUTER.post("/validate", async (req, res) => {
+ESCROW_ROUTER.post("/validate", async (req, res) => {
     if (req.body.ID == "") return res.json("NOT_FOUND");
     await req
-        .DUPLICATE_RAIDS_BASE("Raids")
+        .RAID_CENTRAL_V2_BASE("Raids")
         .find(req.body.ID, function (err, record) {
             if (err) {
                 if (err.error === "NOT_FOUND") {
@@ -18,10 +18,10 @@ RAIDS_ROUTER.post("/validate", async (req, res) => {
         });
 });
 
-RAIDS_ROUTER.post("/update", async (req, res) => {
+ESCROW_ROUTER.post("/update", async (req, res) => {
     let { ID, Hash, Index } = req.body;
 
-    await req.DUPLICATE_RAIDS_BASE("Raids").update(
+    await req.RAID_CENTRAL_V2_BASE("Raids").update(
         [
             {
                 id: ID,
@@ -44,4 +44,4 @@ RAIDS_ROUTER.post("/update", async (req, res) => {
     );
 });
 
-module.exports = RAIDS_ROUTER;
+module.exports = ESCROW_ROUTER;

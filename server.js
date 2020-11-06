@@ -9,7 +9,7 @@ const PAYLOAD_ROUTER = require("./routes/payload");
 const DAOSHOP_ROUTER = require("./routes/daoshop");
 const HIREUS_ROUTER = require("./routes/hireus");
 const TWITTER_ROUTER = require("./routes/twitter");
-const RAIDS_ROUTER = require("./routes/raids");
+const ESCROW_ROUTER = require("./routes/escrow");
 
 Airtable.configure({
     endpointUrl: "https://api.airtable.com",
@@ -17,7 +17,7 @@ Airtable.configure({
 });
 
 let daoshop_base = Airtable.base(process.env.DAOSHOP_BASE_ID);
-let duplicate_raids = Airtable.base(process.env.DUPLICATE_RAIDS_BASE_ID);
+// let duplicate_raids = Airtable.base(process.env.DUPLICATE_RAIDS_BASE_ID);
 let raid_central_v2_base = Airtable.base(process.env.RAID_CENTRAL_V2_BASE_ID);
 
 const app = express();
@@ -27,6 +27,7 @@ app.use(cors());
 app.use(
     "/payload",
     (req, res, next) => {
+        req.DISCORD = Discord;
         req.CLIENT = client;
         next();
     },
@@ -61,12 +62,12 @@ app.use(
     HIREUS_ROUTER
 );
 app.use(
-    "/raids",
+    "/escrow",
     (req, res, next) => {
-        req.DUPLICATE_RAIDS_BASE = duplicate_raids;
+        req.RAID_CENTRAL_V2_BASE = raid_central_v2_base;
         next();
     },
-    RAIDS_ROUTER
+    ESCROW_ROUTER
 );
 app.use(
     "/twitter",

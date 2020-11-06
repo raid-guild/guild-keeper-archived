@@ -68,6 +68,18 @@ client.on("message", (message) => {
     switch (command) {
         case "help":
             return client.commands.get("help").execute(Discord, message, args);
+        case "create-raid":
+            return client.commands
+                .get("create-raid-rip-camp")
+                .execute(Discord, message, args);
+        case "create-rip":
+            return client.commands
+                .get("create-raid-rip-camp")
+                .execute(Discord, message, args);
+        case "create-camp":
+            return client.commands
+                .get("create-raid-rip-camp")
+                .execute(Discord, message, args);
         case "valhalla":
             return client.commands.get("valhalla").execute(message);
         case "role-stats":
