@@ -10,6 +10,7 @@ module.exports = {
         const INACTIVE_STATS = `Returns total inactive members & their usernames.`;
         const TREASURY = `To record a direct transfer into the DAO bank, use **!keeper treasury "brief description" etherscan-link**.`;
         const GAS_INFO = `Returns the live gas price stats.`;
+        const TIMEZONES = `Returns the current time in different timezones.`;
 
         if (args.length < 3)
             return message.channel.send("Missing command! Help with what?");
@@ -72,6 +73,13 @@ module.exports = {
                     new Discord.MessageEmbed()
 
                         .setDescription(GAS_INFO)
+                        .setColor("#ff3864")
+                );
+            case "timezones":
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+
+                        .setDescription(TIMEZONES)
                         .setColor("#ff3864")
                 );
             default:

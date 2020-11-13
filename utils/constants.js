@@ -32,6 +32,10 @@ const HELP_MESSAGE = [
         name: "gas-info",
         value: "Returns live gas prices.",
     },
+    {
+        name: "timezones",
+        value: "Returns the current time in different timezones.",
+    },
 ];
 
 exports.PREFIX = PREFIX;
