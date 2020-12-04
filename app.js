@@ -96,6 +96,8 @@ client.on("message", (message) => {
             return client.commands
                 .get("gas-info")
                 .execute(Discord, message, axios);
+        case "timezones":
+            return client.commands.get("timezones").execute(Discord, message);
         default:
             return message.channel.send(
                 "Invalid command! Check **!keeper help**."
